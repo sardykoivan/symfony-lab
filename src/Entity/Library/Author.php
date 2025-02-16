@@ -14,7 +14,7 @@ class Author
     #[ORM\Column(type: 'uuid')]
     private string $id;
 
-    #[ORM\Column(type: 'string', unique: true, length: 8)]
+    #[ORM\Column(type: 'string', length: 8, unique: true)]
     private string $code;
 
     #[ORM\Column(type: 'string', length: 32)]

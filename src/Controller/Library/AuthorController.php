@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route(path: '/api/library', name: 'route_library_authors_')]
+#[Route(path: '/api/library', name: 'route_library_')]
 final class AuthorController extends ApiController
 {
     public function __construct(
@@ -19,7 +19,7 @@ final class AuthorController extends ApiController
     ) {
     }
 
-    #[Route(path: '/authors', name: 'create', methods: ['POST'])]
+    #[Route(path: '/authors', name: 'authors_create', methods: ['POST'])]
     public function createAuthor(CreateRequestDto $dto): JsonResponse
     {
         $this->authorService->createAuthor($dto);
@@ -27,7 +27,7 @@ final class AuthorController extends ApiController
         return $this->noContent();
     }
 
-    #[Route(path: '/authors', name: 'list', methods: ['GET'])]
+    #[Route(path: '/authors', name: 'authors_list', methods: ['GET'])]
     public function authors(): JsonResponse
     {
         return $this->json(

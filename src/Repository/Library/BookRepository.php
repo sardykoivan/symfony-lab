@@ -14,4 +14,9 @@ final class BookRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Book::class);
     }
+
+    public function findById(string $id): ?Book
+    {
+        return $this->findOneBy(['id' => $id]);
+    }
 }

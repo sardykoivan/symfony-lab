@@ -1,4 +1,4 @@
-### create author
+### authors create
 POST {{host}}/api/library/authors
 Content-Type: application/json
 
@@ -10,3 +10,20 @@ Content-Type: application/json
 
 ### authors list
 GET {{host}}/api/library/authors
+
+### books create
+POST {{host}}/api/library/books
+Content-Type: application/json
+
+{
+  "authorId": "024dc04b-3dd2-4ba6-8ed6-15bcacb74e6c",
+  "title": "У лукоморья",
+  "tags": ["poetry"]
+}
+
+### books list
+GET {{host}}/api/library/books
+
+### books delete
+DELETE {{host}}/api/library/books/ef166c2c-9216-43bf-8702-e8f5a90e3c72
+

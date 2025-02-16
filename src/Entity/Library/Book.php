@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table('library_books')]
-final class Book
+class Book
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid')]
@@ -23,12 +23,21 @@ final class Book
     #[ORM\Column(type: 'json')]
     private array $tags;
 
-    public function __construct(string $id, Author $author, string $title, array $tags)
-    {
+    #[ORM\Column(type: 'boolean')]
+    private bool $isDeleted;
+
+    public function __construct(
+        string $id,
+        Author $author,
+        string $title,
+        array $tags,
+        ?bool $isDeleted = false,
+    ) {
         $this->id = $id;
         $this->author = $author;
         $this->title = $title;
         $this->tags = $tags;
+        $this->isDeleted = $isDeleted;
     }
 
     public function getId(): string
@@ -49,5 +58,15 @@ final class Book
     public function getTags(): array
     {
         return $this->tags;
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): void
+    {
+        $this->isDeleted = $isDeleted;
     }
 }

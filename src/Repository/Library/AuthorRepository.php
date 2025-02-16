@@ -21,4 +21,9 @@ final class AuthorRepository extends ServiceEntityRepository
 
         return $this->findBy(['code' => $code]);
     }
+
+    public function findById(string $id): ?Author
+    {
+        return $this->findOneBy(['id' => $id]);
+    }
 }
