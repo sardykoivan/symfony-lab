@@ -1,0 +1,12 @@
+### create author
+POST {{host}}/api/library/authors
+Content-Type: application/json
+
+{
+  "fullName": "Lermontov",
+  "code": "lmntv",
+  "yearOfBirth": 1799
+}
+
+### authors list
+GET {{host}}/api/library/authors
