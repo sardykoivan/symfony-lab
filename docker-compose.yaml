@@ -1,0 +1,62 @@
+services:
+  nginx:
+    container_name: symfony-lab-nginx
+    working_dir: /var/www/app
+    image: nginx:alpine
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./var/log/nginx-log:/var/log/nginx
+      - ./:/var/www/app
+    ports:
+      - "8093:80"
+    networks:
+      - symfony-lab-network
+    depends_on:
+      - php
+
+  php:
+    container_name: symfony-lab-php
+    working_dir: /var/www/app
+    build: ./docker/php
+    volumes:
+      - ./:/var/www/app
+      - ./docker/php/conf/x-php.ini:/usr/local/etc/php/conf.d/custom-docker-php.ini
+    networks:
+      - symfony-lab-network
+    environment:
+      XDEBUG_CONFIG: "client_host=172.17.0.1"
+      PHP_IDE_CONFIG: "serverName=xdebug-symfony-lab"
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: symfony-lab-pgsql
+    image: postgres:16-alpine
+    env_file: .env
+    ports:
+      - "54328:5432"
+    networks:
+      - symfony-lab-network
+    environment:
+      POSTGRES_ROOT_PASSWORD: postgres
+      POSTGRES_DATABASE: sflab
+      POSTGRES_USER: sflab
+      POSTGRES_PASSWORD: secret
+
+    volumes:
+      - ./var/pg-data:/var/lib/postgresql/data
+#  redis:
+#    container_name: symfony-lab-redis
+#    image: redis:alpine
+#    restart: always
+#    networks:
+#      - symfony-lab-network
+#    ports:
+#      - "6381:6379"
+#    volumes:
+#      - ./var/redis-data:/data
+#    command: [ "redis-server", "--appendonly", "yes" ]
+
+networks:
+  symfony-lab-network:
+    driver: bridge
