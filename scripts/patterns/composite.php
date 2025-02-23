@@ -1,5 +1,6 @@
 <?php
 
+// сделать возможность работать с одиночными объектами также как и с групповыми
 interface FileSystemEntity
 {
     public function contains(string $prefix = '', bool $isRoot = false): void;
