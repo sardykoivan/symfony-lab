@@ -3,9 +3,9 @@ POST {{host}}/api/library/authors
 Content-Type: application/json
 
 {
-  "fullName": "Lermontov",
-  "code": "lmntv",
-  "yearOfBirth": 1799
+  "fullName": "Akunin",
+  "code": "akn",
+  "yearOfBirth": 1950
 }
 
 ### authors list

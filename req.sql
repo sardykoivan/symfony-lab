@@ -24,3 +24,7 @@ select
 union
 select
 2, 'petya';
+
+select year_of_birth, count(code) cnt
+from library_authors a
+group by year_of_birth
